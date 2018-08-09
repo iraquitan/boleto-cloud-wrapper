@@ -3,8 +3,8 @@ from boleto_cloud.boletos import Boleto
 
 
 if __name__ == "__main__":
-    boleto_token = "ACin7NWnpRVC-dpjKqu4b5LVR7T1vcbE9UmhAm-Qa9g"
-    BC = Boleto()
+    boleto_token = "9_Vp4J1sVyl6osfWIuE9ftDX3cszUnbd-3ZFD060kBM="
+    BC = Boleto(boleto_token)
     boleto_data = {
         "boleto.conta.banco": "237",
         "boleto.conta.agencia": "1234-5",
@@ -33,13 +33,14 @@ if __name__ == "__main__":
         "boleto.pagador.endereco.bairro": "Casa Natal",
         "boleto.pagador.endereco.logradouro": "BR-499",
         "boleto.pagador.endereco.numero": "s/n",
-        "boleto.pagador.endereco.complemento": "Sï¿½tio - Subindo a serra da Mantiqueira",
+        "boleto.pagador.endereco.complemento": "Sítio - Subindo a serra da Mantiqueira",
         "boleto.instrucao": "Atenção! NÃO RECEBER ESTE BOLETO.",
         "boleto.instrucao": "Este é apenas um teste utilizando a API Boleto Cloud",
         "boleto.instrucao": "Mais info em http://www.boletocloud.com/app/dev/api"
     }
 
-    r = BC.create(data=boleto_data)
+    # r = BC.create(data=boleto_data)
+    r = BC.get()
     print(r.status_code)
     if r.status_code == 200:
         Path("boleto-gerado-teste.pdf").write_bytes(r.content)

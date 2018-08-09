@@ -14,4 +14,5 @@ import os
 #     return getattr(settings, name, default)
 
 def environ(name, default=None):
-    return getattr(os.environ, name, default)
+    # return getattr(os.environ, name, default)
+    return os.environ.get(name, default)

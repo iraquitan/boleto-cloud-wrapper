@@ -1,28 +1,37 @@
-import requests
+from . import session, API_ENDPOINT, DUPLICATE
 
-from .utils import environ
-from .endpoints import endpoint, duplicate
+# class Boleto():
+#     resource = "boletos"
+#     endpoint = endpoint
+#     duplicate = duplicate
+
+#     def __init__(self,):
+#         self.s = self.session()
+
+#     def session(self,):
+#         return requests.Session()
+
+#     def create(self, data):
+#         print(self.endpoint)
+#         # return self.s.post(self.endpoint / self.resource, data=data, auth=(self.user, self.token))
+#         return self.s.post(self.endpoint / self.resource, data=data)
+
+#     def get(self, token):
+#         # return self.s.get(self.endpoint / self.resource / token, auth=(self.user, self.token))
+#         return self.s.get(self.endpoint / self.resource / token)
+
+#     def duplicate_url(self, token):
+#         return self.duplicate / token
 
 
 class Boleto():
-    resource = "boletos"
-    user = environ("BOLETO_CLOUD_USER")
-    token = environ("BOLETO_CLOUD_TOKEN")
-    endpoint = endpoint
-    duplicate = duplicate
+    RESOURCE = "boletos"
 
-    def __init__(self,):
-        self.s = self.session()
+    def __init__(self, token):
+        self.token = token
 
-    def session(self,):
-        return requests.Session()
+    def get(self):
+        return session.get(API_ENDPOINT / self.RESOURCE / self.token)
 
-    def create(self, data):
-        print(self.endpoint)
-        return self.s.post(self.endpoint / self.resource, data=data, auth=(self.user, self.token))
-
-    def get(self, token):
-        return self.s.get(self.endpoint / self.resource / token, auth=(self.user, self.token))
-
-    def duplicate_url(self, token):
-        return self.duplicate / token
+    def duplicate_url(self):
+        return DUPLICATE / self.token
